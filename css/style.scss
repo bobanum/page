@@ -1,0 +1,27 @@
+@page {
+    margin: 0;
+}
+:root {
+    --largeur: 8.5in;
+    --hauteur: 11in;
+    --marges: .25in;
+    --rangees: 2;
+    --colonnes: 2;
+}
+html {
+    height: 100%;
+}
+body {
+    margin: 0;
+    height: 100%;
+}
+div.page {
+    display: grid;
+    width: var(--largeur);
+    height: var(--hauteur);
+    grid-template-columns: repeat(var(--colonnes), 1fr);
+    grid-template-rows: repeat(var(--rangees), 1fr);
+}
+div.volet {
+    padding: var(--marges);
+}
