@@ -4,24 +4,41 @@
 :root {
     --largeur: 8.5in;
     --hauteur: 11in;
-    --marges: .25in;
+    --marges: .5in;
     --rangees: 2;
     --colonnes: 2;
+    --couleur-marque: hsl(0, 0%, 90%);
 }
 html {
     height: 100%;
+    @media screen {
+        background-color: #333;
+    }
 }
 body {
     margin: 0;
     height: 100%;
 }
 div.page {
+    position: relative;
     display: grid;
+    box-sizing: border-box;
     width: var(--largeur);
     height: var(--hauteur);
     grid-template-columns: repeat(var(--colonnes), 1fr);
     grid-template-rows: repeat(var(--rangees), 1fr);
-}
-div.volet {
     padding: var(--marges);
+    gap: calc(2 * var(--marges));
+    align-items: center;
+    justify-items: center;
+    @media screen {
+        background-color: #fff;
+        box-shadow: .5em .5em 1em black;
+        margin: 1em auto;
+    }
 }
+// div.volet {
+//     // padding: var(--marges);
+//     background-color: antiquewhite;
+// }
+@import "marques";

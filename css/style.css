@@ -1,0 +1,101 @@
+@page {
+  margin: 0;
+}
+:root {
+  --largeur: 8.5in;
+  --hauteur: 11in;
+  --marges: .5in;
+  --rangees: 2;
+  --colonnes: 2;
+  --couleur-marque: hsl(0, 0%, 90%);
+}
+
+html {
+  height: 100%;
+}
+@media screen {
+  html {
+    background-color: #333;
+  }
+}
+
+body {
+  margin: 0;
+  height: 100%;
+}
+
+div.page {
+  position: relative;
+  display: grid;
+  box-sizing: border-box;
+  width: var(--largeur);
+  height: var(--hauteur);
+  grid-template-columns: repeat(var(--colonnes), 1fr);
+  grid-template-rows: repeat(var(--rangees), 1fr);
+  padding: var(--marges);
+  gap: calc(2 * var(--marges));
+  align-items: center;
+  justify-items: center;
+}
+@media screen {
+  div.page {
+    background-color: #fff;
+    box-shadow: 0.5em 0.5em 1em black;
+    margin: 1em auto;
+  }
+}
+
+.marques {
+  --epaisseur: 1px;
+  --longueur: 0.25in;
+  --couleur: hsl(0, 0%, 80%);
+}
+.marques,
+.marques > * {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+.marques > * {
+  display: grid;
+}
+.marques > * > * > *, .marques > * > ::before, .marques > * > ::after {
+  content: "";
+  border: 0px solid var(--couleur);
+}
+.marques > *.rangees {
+  align-content: space-evenly;
+}
+.marques > *.rangees > * {
+  display: flex;
+  justify-content: space-between;
+}
+.marques > *.rangees > *::before, .marques > *.rangees > *::after {
+  width: var(--longueur);
+  border-top-width: var(--epaisseur);
+}
+.marques > *.rangees > * > * {
+  width: calc(var(--longueur) / 2);
+  border-top-width: var(--epaisseur);
+  margin: 0 calc(var(--longueur) * 3 / 4);
+}
+.marques > *.colonnes {
+  grid-auto-flow: column;
+  justify-content: space-evenly;
+}
+.marques > *.colonnes > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.marques > *.colonnes > *::before, .marques > *.colonnes > *::after {
+  height: var(--longueur);
+  border-left-width: var(--epaisseur);
+}
+.marques > *.colonnes > * > * {
+  height: calc(var(--longueur) / 2);
+  border-left-width: var(--epaisseur);
+  margin: calc(var(--longueur) * 3 / 4) 0;
+}/*# sourceMappingURL=style.css.map */

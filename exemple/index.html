@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="module">
+        import App from "../src/App.js";
+        App.init().then(data => {
+            App.main();
+        })
+    </script>
+    <link rel="stylesheet" href="test.css
+    ">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="volet">
+        <h1>Au théâtre</h1>
+        <div>
+            <div>
+                <p class="intro">Les quatre sièges du milieu dans les trois premières rangées d'une loge au théâtre étaient tous pris lors d'un spectacle récemment. À l'aide des indices ci-dessous, pouvez-vous assigner la bonne place à ces gens?</p>
+                <h2>Indices</h2>
+                <ol>
+                    <li>Pierre est assis juste derrière Angela et en diagonale devant Henri.</li>
+                    <li>Nina a le billet pour le siège 12 de la rangée B.</li>
+                    <li>Les sièges de chaque rangée sont occupés par deux hommes et deux femmes.</li>
+                    <li>Maxine est à deux sièges à droite de Robert sur la même rangée.</li>
+                    <li>Judy, qui est juste derrière Charles, a son mari Vincent à sa droite.</li>
+                    <li>Un des hommes occupe le siège 13 de la rangée A.</li>
+                    <li>Tony, Janet et Lydia ne sont pas dans la même rangée. Le siège à gauche de Lydia est occupé par un homme.</li>
+                </ol>
+            </div>
+            <div>
+                <img style="width:100%;" src="img/fauteuil.svg" alt=""/>
+                <div><strong>Noms</strong>: Angela, Charles, Henri, Janet, Judy, Lydia, Maxine, Nina, Pierre, Robert, Tony, Vincent.</div>
+                <div><strong>Truc</strong>: Trouvez d'abord le nom de la personne qui occupe le siège 13 de la rangée A.</div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

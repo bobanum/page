@@ -1,0 +1,56 @@
+.marques {
+    --epaisseur: 1px;
+    --longueur: 0.25in;
+    --couleur: hsl(0, 0%, 80%);
+    &,
+    > * {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+    > * {
+        display: grid;
+        > * > *, > ::before, > ::after {
+            content: "";
+            border: 0px solid var(--couleur);
+        }
+        &.rangees {
+            align-content: space-evenly;
+            > * {
+                display: flex;
+                justify-content: space-between;
+                &::before,
+                &::after {
+                    width: var(--longueur);
+                    border-top-width: var(--epaisseur);
+                }
+                > * {
+                    width: calc(var(--longueur) / 2);
+                    border-top-width: var(--epaisseur);
+                    margin: 0 calc(var(--longueur) * 3 / 4);
+                }
+            }
+        }
+        &.colonnes {
+            grid-auto-flow: column;
+            justify-content: space-evenly;
+            > * {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                &::before,
+                &::after {
+                    height: var(--longueur);
+                    border-left-width: var(--epaisseur);
+                }
+                > * {
+                    height: calc(var(--longueur) / 2);
+                    border-left-width: var(--epaisseur);
+                    margin: calc(var(--longueur) * 3 / 4) 0;
+                }
+            }
+        }
+    }
+}

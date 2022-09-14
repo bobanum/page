@@ -1,4 +1,4 @@
-347. AU THÉÂTRE
+347. Au théâtre
 
 Les quatre sièges du milieu dans les trois premières rangées d'une loge au théâtre étaient tous pris lors d'un spectacle récemment. À l'aide des indices ci-dessous, pouvez-vous assigner la bonne place à ces gens?
 
