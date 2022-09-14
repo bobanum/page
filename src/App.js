@@ -29,15 +29,19 @@ export default class App {
         link.rel = "stylesheet";
         var flaps = document.querySelectorAll(".flap");
         flaps.forEach(flap => {
+            var props = Object.create(this);
+            this.parseData(flap, props);
+            console.log(this, props);
             var page = document.body.appendChild(document.createElement("div"));
             page.classList.add("page");
-            var format = this.getFormat(this);
+            var format = this.getFormat(props);
             page.style.setProperty("--width", format.width + "pt");
             page.style.setProperty("--height", format.height + "pt");
-            page.style.setProperty("--columns", this.columns);
-            page.style.setProperty("--rows", this.rows);
-            page.appendChild(this.marks(this.rows, this.columns));
-            var nb = this.columns * this.rows - 1;
+            page.style.setProperty("--margin", props.margin);
+            page.style.setProperty("--columns", props.columns);
+            page.style.setProperty("--rows", props.rows);
+            page.appendChild(this.marks(props.rows, props.columns));
+            var nb = props.columns * props.rows - 1;
             page.appendChild(flap);
             for (let i = 0; i < nb; i += 1) {
                 page.appendChild(flap.cloneNode(true));

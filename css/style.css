@@ -44,6 +44,10 @@ div.page {
   }
 }
 
+.flap {
+  overflow: hidden;
+}
+
 .marks {
   --width: 1px;
   --length: 0.25in;
