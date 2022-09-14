@@ -2,12 +2,11 @@
     margin: 0;
 }
 :root {
-    --largeur: 8.5in;
-    --hauteur: 11in;
-    --marges: .5in;
-    --rangees: 2;
-    --colonnes: 2;
-    --couleur-marque: hsl(0, 0%, 90%);
+    --width: 8.5in;
+    --heigth: 11in;
+    --margins: .5in;
+    --rows: 2;
+    --columns: 2;
 }
 html {
     height: 100%;
@@ -23,12 +22,12 @@ div.page {
     position: relative;
     display: grid;
     box-sizing: border-box;
-    width: var(--largeur);
-    height: var(--hauteur);
-    grid-template-columns: repeat(var(--colonnes), 1fr);
-    grid-template-rows: repeat(var(--rangees), 1fr);
-    padding: var(--marges);
-    gap: calc(2 * var(--marges));
+    width: var(--width);
+    height: var(--heigth);
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+    padding: var(--margins);
+    gap: calc(2 * var(--margins));
     align-items: center;
     justify-items: center;
     @media screen {
@@ -37,8 +36,4 @@ div.page {
         margin: 1em auto;
     }
 }
-// div.volet {
-//     // padding: var(--marges);
-//     background-color: antiquewhite;
-// }
-@import "marques";
+@import "marks";

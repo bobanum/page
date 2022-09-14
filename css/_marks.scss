@@ -1,7 +1,7 @@
-.marques {
-    --epaisseur: 1px;
-    --longueur: 0.25in;
-    --couleur: hsl(0, 0%, 80%);
+.marks {
+    --width: 1px;
+    --length: 0.25in;
+    --color: hsl(0, 0%, 80%);
     &,
     > * {
         position: absolute;
@@ -14,26 +14,26 @@
         display: grid;
         > * > *, > ::before, > ::after {
             content: "";
-            border: 0px solid var(--couleur);
+            border: 0px solid var(--color);
         }
-        &.rangees {
+        &.rows {
             align-content: space-evenly;
             > * {
                 display: flex;
                 justify-content: space-between;
                 &::before,
                 &::after {
-                    width: var(--longueur);
-                    border-top-width: var(--epaisseur);
+                    width: var(--length);
+                    border-top-width: var(--width);
                 }
                 > * {
-                    width: calc(var(--longueur) / 2);
-                    border-top-width: var(--epaisseur);
-                    margin: 0 calc(var(--longueur) * 3 / 4);
+                    width: calc(var(--length) / 2);
+                    border-top-width: var(--width);
+                    margin: 0 calc(var(--length) * 3 / 4);
                 }
             }
         }
-        &.colonnes {
+        &.columns {
             grid-auto-flow: column;
             justify-content: space-evenly;
             > * {
@@ -42,13 +42,13 @@
                 justify-content: space-between;
                 &::before,
                 &::after {
-                    height: var(--longueur);
-                    border-left-width: var(--epaisseur);
+                    height: var(--length);
+                    border-left-width: var(--width);
                 }
                 > * {
-                    height: calc(var(--longueur) / 2);
-                    border-left-width: var(--epaisseur);
-                    margin: calc(var(--longueur) * 3 / 4) 0;
+                    height: calc(var(--length) / 2);
+                    border-left-width: var(--width);
+                    margin: calc(var(--length) * 3 / 4) 0;
                 }
             }
         }

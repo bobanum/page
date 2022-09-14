@@ -2,12 +2,11 @@
   margin: 0;
 }
 :root {
-  --largeur: 8.5in;
-  --hauteur: 11in;
-  --marges: .5in;
-  --rangees: 2;
-  --colonnes: 2;
-  --couleur-marque: hsl(0, 0%, 90%);
+  --width: 8.5in;
+  --heigth: 11in;
+  --margins: .5in;
+  --rows: 2;
+  --columns: 2;
 }
 
 html {
@@ -28,12 +27,12 @@ div.page {
   position: relative;
   display: grid;
   box-sizing: border-box;
-  width: var(--largeur);
-  height: var(--hauteur);
-  grid-template-columns: repeat(var(--colonnes), 1fr);
-  grid-template-rows: repeat(var(--rangees), 1fr);
-  padding: var(--marges);
-  gap: calc(2 * var(--marges));
+  width: var(--width);
+  height: var(--heigth);
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  padding: var(--margins);
+  gap: calc(2 * var(--margins));
   align-items: center;
   justify-items: center;
 }
@@ -45,57 +44,57 @@ div.page {
   }
 }
 
-.marques {
-  --epaisseur: 1px;
-  --longueur: 0.25in;
-  --couleur: hsl(0, 0%, 80%);
+.marks {
+  --width: 1px;
+  --length: 0.25in;
+  --color: hsl(0, 0%, 80%);
 }
-.marques,
-.marques > * {
+.marks,
+.marks > * {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
 }
-.marques > * {
+.marks > * {
   display: grid;
 }
-.marques > * > * > *, .marques > * > ::before, .marques > * > ::after {
+.marks > * > * > *, .marks > * > ::before, .marks > * > ::after {
   content: "";
-  border: 0px solid var(--couleur);
+  border: 0px solid var(--color);
 }
-.marques > *.rangees {
+.marks > *.rows {
   align-content: space-evenly;
 }
-.marques > *.rangees > * {
+.marks > *.rows > * {
   display: flex;
   justify-content: space-between;
 }
-.marques > *.rangees > *::before, .marques > *.rangees > *::after {
-  width: var(--longueur);
-  border-top-width: var(--epaisseur);
+.marks > *.rows > *::before, .marks > *.rows > *::after {
+  width: var(--length);
+  border-top-width: var(--width);
 }
-.marques > *.rangees > * > * {
-  width: calc(var(--longueur) / 2);
-  border-top-width: var(--epaisseur);
-  margin: 0 calc(var(--longueur) * 3 / 4);
+.marks > *.rows > * > * {
+  width: calc(var(--length) / 2);
+  border-top-width: var(--width);
+  margin: 0 calc(var(--length) * 3 / 4);
 }
-.marques > *.colonnes {
+.marks > *.columns {
   grid-auto-flow: column;
   justify-content: space-evenly;
 }
-.marques > *.colonnes > * {
+.marks > *.columns > * {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.marques > *.colonnes > *::before, .marques > *.colonnes > *::after {
-  height: var(--longueur);
-  border-left-width: var(--epaisseur);
+.marks > *.columns > *::before, .marks > *.columns > *::after {
+  height: var(--length);
+  border-left-width: var(--width);
 }
-.marques > *.colonnes > * > * {
-  height: calc(var(--longueur) / 2);
-  border-left-width: var(--epaisseur);
-  margin: calc(var(--longueur) * 3 / 4) 0;
+.marks > *.columns > * > * {
+  height: calc(var(--length) / 2);
+  border-left-width: var(--width);
+  margin: calc(var(--length) * 3 / 4) 0;
 }/*# sourceMappingURL=style.css.map */
