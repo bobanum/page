@@ -21,7 +21,7 @@ export default class App {
     }
     static main() {
         var { href } = new URL(import.meta.url);
-        href = href.split("/").slice(0,-2);
+        href = href.split("/").slice(0, -2);
         href.push("css", "style.css");
         href = href.join("/");
         var link = document.head.appendChild(document.createElement("link"));
@@ -31,6 +31,9 @@ export default class App {
         flaps.forEach(flap => {
             var page = document.body.appendChild(document.createElement("div"));
             page.classList.add("page");
+            var format = this.getFormat(this);
+            page.style.setProperty("--width", format.width + "pt");
+            page.style.setProperty("--height", format.height + "pt");
             page.style.setProperty("--columns", this.columns);
             page.style.setProperty("--rows", this.rows);
             page.appendChild(this.marks(this.rows, this.columns));
@@ -40,6 +43,51 @@ export default class App {
                 page.appendChild(flap.cloneNode(true));
             }
         });
+    }
+    static getFormat(obj = this) {
+        var width = 0, height = 0;
+        switch (obj.format.toLowerCase()) {
+            case "letter":
+                width = this.toPts(8.5, "in");
+                height = this.toPts(11, "in");
+                break;
+            case "legal":
+                width = this.toPts(8.5, "in");
+                height = this.toPts(14, "in");
+                break;
+            case "ledger":
+            case "tabloid":
+                width = this.toPts(11, "in");
+                height = this.toPts(17, "in");
+                break;
+            case "a3":
+                width = this.toPts(297, "mm");
+                height = this.toPts(420, "mm");
+                break;
+            case "a4":
+                width = this.toPts(210, "mm");
+                height = this.toPts(297, "mm");
+                break;
+            default:
+                let [w, wu, h, hu] = /([0-9.]+)([a-z]+)X([0-9.]+)([a-z]+)/i.exec(obj.format).slice(1);
+                console.log(obj.format);
+                width = this.toPts(w, wu);
+                height = this.toPts(h, hu);
+                obj.orientation = "";
+        }
+        if ((obj.orientation === "portrait" && width > height) || (obj.orientation === "landscape" && width < height)) {
+            [width, height] = [height, width];
+        }
+        return {width: width, height: height};
+    }
+    static toPts(val, unit) {
+        const PTS = { pt: 1, in: 72, pc: 12, px: .75, mm: 2.83465, cm: 28.3465, dm: 283.465, m: 2834.65 };
+        val = parseFloat(val);
+        unit = unit.toLowerCase();
+        if (PTS[unit] === undefined) {
+            throw `Unrecognized length unit '${unit}'`;
+        }
+        return val * PTS[unit];
     }
     static marks(rows, columns) {
         var resultat = document.createElement("div");
@@ -67,6 +115,7 @@ export default class App {
         this.format = "letter";
         this._columns = 1;
         this._rows = 1;
+        this.margin = "0.5in";
         return new Promise(resolve => {
             window.addEventListener("load", e => {
                 this.parseData(document.body, this);

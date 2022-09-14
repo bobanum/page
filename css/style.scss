@@ -3,8 +3,8 @@
 }
 :root {
     --width: 8.5in;
-    --heigth: 11in;
-    --margins: .5in;
+    --height: 11in;
+    --margin: .5in;
     --rows: 2;
     --columns: 2;
 }
@@ -23,11 +23,11 @@ div.page {
     display: grid;
     box-sizing: border-box;
     width: var(--width);
-    height: var(--heigth);
+    height: var(--height);
     grid-template-columns: repeat(var(--columns), 1fr);
     grid-template-rows: repeat(var(--rows), 1fr);
-    padding: var(--margins);
-    gap: calc(2 * var(--margins));
+    padding: var(--margin);
+    gap: calc(2 * var(--margin));
     align-items: center;
     justify-items: center;
     @media screen {
