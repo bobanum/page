@@ -28,8 +28,8 @@ body {
     grid-template-rows: repeat(var(--rows), 1fr);
     padding: var(--margin);
     gap: calc(2 * var(--margin));
-    align-items: center;
-    justify-items: center;
+    align-items: stretch;
+    justify-items: stretch;
     @media screen {
         background-color: #fff;
         box-shadow: .5em .5em 1em black;
