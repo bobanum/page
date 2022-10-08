@@ -5,8 +5,8 @@
   --width: 8.5in;
   --height: 11in;
   --margin: .5in;
-  --rows: 2;
-  --columns: 2;
+  --rows: 1;
+  --columns: 1;
 }
 
 html {
@@ -23,7 +23,7 @@ body {
   height: 100%;
 }
 
-div.page {
+.page {
   position: relative;
   display: grid;
   box-sizing: border-box;
@@ -37,15 +37,11 @@ div.page {
   justify-items: center;
 }
 @media screen {
-  div.page {
+  .page {
     background-color: #fff;
     box-shadow: 0.5em 0.5em 1em black;
     margin: 1em auto;
   }
-}
-
-.flap {
-  overflow: hidden;
 }
 
 .marks {

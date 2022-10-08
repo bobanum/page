@@ -5,8 +5,8 @@
     --width: 8.5in;
     --height: 11in;
     --margin: .5in;
-    --rows: 2;
-    --columns: 2;
+    --rows: 1;
+    --columns: 1;
 }
 html {
     height: 100%;
@@ -18,7 +18,7 @@ body {
     margin: 0;
     height: 100%;
 }
-div.page {
+.page {
     position: relative;
     display: grid;
     box-sizing: border-box;
@@ -35,8 +35,5 @@ div.page {
         box-shadow: .5em .5em 1em black;
         margin: 1em auto;
     }
-}
-.flap {
-    overflow: hidden;
 }
 @import "marks";

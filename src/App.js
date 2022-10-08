@@ -24,7 +24,7 @@ export default class App {
         href = href.split("/").slice(0, -2);
         href.push("css", "style.css");
         href = href.join("/");
-        var link = document.head.appendChild(document.createElement("link"));
+        var link = document.head.insertBefore(document.createElement("link"), document.head.firstChild);
         link.href = href;
         link.rel = "stylesheet";
         var flaps = document.querySelectorAll(".flap");
