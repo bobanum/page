@@ -1,0 +1,46 @@
+@page {
+    size: var(--width) var(--height);
+    margin: 0;
+
+    @top-left {
+        content: "Page " counter(pageNumber);
+    }
+}
+
+@page landscape {
+    size: var(--height) var(--width);
+}
+@page portrait {
+    size: var(--width) var(--height);
+}
+
+.page {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    display: grid;
+    > * {
+        grid-row: 1 / 1;
+        grid-column: 1 / 1;
+    }
+    
+    @media screen {
+        background-color: #fff;
+        box-shadow: .5em .5em 1em black;
+        margin: 1em auto;
+    }
+}
+.flaps {
+    display: grid;
+    padding: var(--margin);
+    grid-template-columns: repeat(var(--columns), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+    gap: calc(2 * var(--margin));
+    align-items: stretch;
+    justify-items: stretch;
+    
+}
+.flap {
+    position: relative;
+    z-index: 1;
+}

@@ -5,12 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script type="module" src="../src/App.js"></script>
+    <script type="module">
+        import { Page } from '.-/src/Page.js';
+        Page.main();
+    </script>
     <link rel="stylesheet" href="css/example.css">
     <title>Au théâtre</title>
 </head>
 
-<body data-rows="2" data-orientation="portrait" data-format="letter" data-marks.length="1in">
+<body data-rows="2" data-columns="2" data-orientation="landscape" data-format="letter" data-marks.length="1in">
     <div class="flap" data-margin="1in">
         <h1>Au théâtre</h1>
         <div>
@@ -28,7 +31,7 @@
                 </ol>
             </div>
             <div>
-                <img style="width:100%;" src="img/fauteuil.svg" alt=""/>
+                <img style="width:100%;" src="img/fauteuil.svg" alt="" />
                 <div><strong>Noms</strong>: Angela, Charles, Henri, Janet, Judy, Lydia, Maxine, Nina, Pierre, Robert, Tony, Vincent.</div>
                 <div><strong>Truc</strong>: Trouvez d'abord le nom de la personne qui occupe le siège 13 de la rangée A.</div>
             </div>

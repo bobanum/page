@@ -1,16 +1,16 @@
-@page {
-  margin: 0;
-}
 :root {
   --width: 8.5in;
   --height: 11in;
   --margin: .5in;
   --rows: 1;
   --columns: 1;
+  --font-body: sans-serif;
+  --font-heading: sans-serif;
 }
 
 html {
   height: 100%;
+  font-family: var(--font-body, sans-serif);
 }
 @media screen {
   html {
@@ -19,22 +19,56 @@ html {
 }
 
 body {
-  margin: 0;
   height: 100%;
 }
 
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+th,
+label,
+legend,
+caption,
+figcaption {
+  font-family: var(--font-heading);
+  line-height: 1;
+}
+
+@page {
+  size: var(--width) var(--height);
+  margin: 0;
+  @top-left {
+    content: "Page " counter(pageNumber);
+  }
+}
+@page landscape {
+  size: var(--height) var(--width);
+}
+@page portrait {
+  size: var(--width) var(--height);
+}
 .page {
   position: relative;
-  display: grid;
-  box-sizing: border-box;
   width: var(--width);
   height: var(--height);
-  grid-template-columns: repeat(var(--columns), 1fr);
-  grid-template-rows: repeat(var(--rows), 1fr);
-  padding: var(--margin);
-  gap: calc(2 * var(--margin));
-  align-items: stretch;
-  justify-items: stretch;
+  display: grid;
+}
+.page > * {
+  grid-row: 1/1;
+  grid-column: 1/1;
 }
 @media screen {
   .page {
@@ -44,20 +78,30 @@ body {
   }
 }
 
+.flaps {
+  display: grid;
+  padding: var(--margin);
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  gap: calc(2 * var(--margin));
+  align-items: stretch;
+  justify-items: stretch;
+}
+
+.flap {
+  position: relative;
+  z-index: 1;
+}
+
 .marks {
   --width: 1px;
   --length: 0.25in;
   --color: hsl(0, 0%, 80%);
-}
-.marks,
-.marks > * {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  display: grid;
 }
 .marks > * {
+  grid-row: 1;
+  grid-column: 1;
   display: grid;
 }
 .marks > * > * > *, .marks > * > ::before, .marks > * > ::after {
@@ -97,4 +141,4 @@ body {
   height: calc(var(--length) / 2);
   border-left-width: var(--width);
   margin: calc(var(--length) * 3 / 4) 0;
-}/*# sourceMappingURL=style.css.map */
+}

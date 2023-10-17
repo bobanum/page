@@ -1,0 +1,38 @@
+html {
+	height: 100%;
+
+	@media screen {
+		background-color: #333;
+	}
+	font-family: var(--font-body, sans-serif);
+}
+
+body {
+	height: 100%;
+}
+
+*,
+*:before,
+*:after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+th,
+label,
+legend,
+caption,
+figcaption
+{
+	font-family: var(--font-heading);
+	line-height: 1;
+}

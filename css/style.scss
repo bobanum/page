@@ -1,39 +1,4 @@
-@page {
-    margin: 0;
-}
-:root {
-    --width: 8.5in;
-    --height: 11in;
-    --margin: .5in;
-    --rows: 1;
-    --columns: 1;
-}
-html {
-    height: 100%;
-    @media screen {
-        background-color: #333;
-    }
-}
-body {
-    margin: 0;
-    height: 100%;
-}
-.page {
-    position: relative;
-    display: grid;
-    box-sizing: border-box;
-    width: var(--width);
-    height: var(--height);
-    grid-template-columns: repeat(var(--columns), 1fr);
-    grid-template-rows: repeat(var(--rows), 1fr);
-    padding: var(--margin);
-    gap: calc(2 * var(--margin));
-    align-items: stretch;
-    justify-items: stretch;
-    @media screen {
-        background-color: #fff;
-        box-shadow: .5em .5em 1em black;
-        margin: 1em auto;
-    }
-}
+@import "variables";
+@import "boilerplate";
+@import "page";
 @import "marks";
