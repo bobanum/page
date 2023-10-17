@@ -1,11 +1,10 @@
+@import url("font-themes/minimalist.css");
 :root {
   --width: 8.5in;
   --height: 11in;
   --margin: .5in;
   --rows: 1;
   --columns: 1;
-  --font-body: sans-serif;
-  --font-heading: sans-serif;
 }
 
 html {

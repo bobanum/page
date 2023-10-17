@@ -7,47 +7,229 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="style.css">
 	<script type="module">
-		var card = `
-			<h1>Exploring the Deep Sea: Discovering Hidden Wonders Beneath the Ocean</h1>
-			<p>Scuba diving is much more than just a hobby; it's an adventure that takes you into a realm of extraordinary beauty. Colorful coral reefs, vibrant exotic fish, and fascinating marine creatures await you.</p>
-			<h2>Dive into the mysterious world of the abyss where marine fauna and flora reveal their splendor.</h2>
-			<p>Join us for an unforgettable exploration of the depths of the sea, where each dive unveils new surprises. It's an opportunity to discover the diversity of marine life and raise awareness about the importance of preserving our oceans for future generations.</p>
-		`;
-		var styles = {
-			"Artistic and Handcrafted": "#artistic-handcrafted{--font-heading 'Poiret One', cursive;--font-subheading;'Indie Flower', cursive;--font-body;'Dancing Script', cursive}",
-			"Bold and Playful": "#bold-playful{--font-heading: 'Fredoka One', sans-serif;--font-subheading: 'Oswald', sans-serif;--font-body: 'Nunito', sans-serif}",
-			"Corporate": "#corporate{--font-heading: 'Lato', sans-serif;--font-subheading: 'Open Sans', sans-serif;--font-body: 'Roboto', sans-serif;}",
-			"Elegant Script": "#elegant-script{--font-heading: 'Great Vibes', cursive;--font-subheading: 'Sacramento', cursive;--font-body: 'Quicksand', sans-serif;}",
-			"Elegant and Sophisticated": "#elegant-sophisticated{--font-heading: 'Cormorant', serif;--font-subheading: 'Crimson Text', serif;--font-body: 'Source Sans Pro', sans-serif;}",
-			"Fun and Playful": "#fun-playful{ --font-heading: 'Baloo', cursive;--font-subheading: 'Bangers', cursive;--font-body: 'Lato', sans-serif;}",
-			"Futuristic and Clean": "#futuristic-clean{--font-heading: 'Poppins', sans-serif;--font-subheading: 'Roboto Condensed', sans-serif;--font-body: 'Nunito Sans', sans-serif;}",
-			"Geometric Sans-Serif": "#geometric-sans-serif{--font-heading: 'Roboto Condensed', sans-serif;--font-subheading: 'Ubuntu', sans-serif;--font-body: 'Noto Sans', sans-serif;}",
-			"Handwritten": "#handwritten{--font-heading: 'Pacifico', sans-serif;--font-subheading: 'Amatic SC', cursive;--font-body: 'Indie Flower', cursive;}",
-			"Luxury and Elegance": "#luxury-elegance{--font-heading: 'Cormorant Garamond', serif;--font-subheading: 'Parisienne', cursive;--font-body: 'Lato', sans-serif;}",
-			"Minimalist": "#minimalist{--font-heading: 'Source Sans Pro', sans-serif;--font-subheading: 'Lato', sans-serif;--font-body: 'Poppins', sans-serif;}",
-			"Modern Sans-Serif": "#modern-serif{--font-heading: 'Montserrat', sans-serif;--font-subheading: 'Raleway', sans-serif;--font-body: 'Open Sans', sans-serif;}",
-			"Nature and Organic": "#nature-organic{ --font-heading: 'Caveat', cursive;--font-subheading: 'Satisfy', cursive;--font-body: 'Dosis', sans-serif;}",
-			"Narrow": "#narrow{--font-heading: 'Lato', sans-serif;--font-subheading: 'Lato', sans-serif;--font-body: 'Oswald', sans-serif;}",
-			"Playful and Casual": "#playful-casual{--font-heading: 'Luckiest Guy', cursive;--font-subheading: 'Pacifico', cursive;--font-body: 'Nunito Sans', sans-serif;}",
-			"Professional and Business": "#professional-business{--font-heading: 'Raleway', sans-serif;--font-subheading: 'Montserrat', sans-serif;--font-body: 'Roboto', sans-serif;}",
-			"Retro": "#retro{--font-heading: 'Lobster', cursive;--font-subheading: 'Pacifico', cursive;--font-body: 'Indie Flower', cursive;}",
-			"Serif Elegance": "#serif-elegance{--font-heading: 'Crimson Text', serif;--font-subheading: 'Merriweather', serif;--font-body: 'Source Sans Pro', sans-serif;}",
-			"Tech and Modern": "#tech-modern{--font-heading: 'Exo 2', sans-serif;--font-subheading: 'Orbitron', sans-serif;--font-body: 'Raleway', sans-serif;}",
-			"Vintage and Rustic": "#vintage-rustic{--font-heading: 'Abril Fatface', cursive;--font-subheading: 'Josefin Slab', serif;--font-body: 'Lora', serif;}",
-		};
-		var style = document.head.appendChild(document.createElement("style"));
-		style.innerHTML = Object.values(styles).join("\n");
-		for (let nom in styles) {
+		const styles = [
+			{
+				id: "artistic-handcrafted",
+				name: "Artistic and Handcrafted",
+				heading: 'Poiret One',
+				subheading: 'Indie Flower',
+				body:'Dancing Script',
+			},
+			{
+				id: "bold-playful",
+				name: "Bold and Playful",
+				heading: 'Fredoka One',
+				subheading: 'Oswald',
+				body:'Nunito',
+			},
+			{
+				id: "corporate",
+				name: "Corporate",
+				heading: 'Lato',
+				subheading: 'Open Sans',
+				body:'Roboto',
+			},
+			{
+				id: "elegant-script",
+				name: "Elegant Script",
+				heading: 'Great Vibes',
+				subheading: 'Sacramento',
+				body:'Quicksand',
+			},
+			{
+				id: "elegant-sophisticated",
+				name: "Elegant and Sophisticated",
+				heading: 'Cormorant',
+				subheading: 'Crimson Text',
+				body:'Source Sans Pro',
+			},
+			{
+				id: "fun-playful",
+				name: "Fun and Playful",
+				heading: 'Baloo',
+				subheading: 'Bangers',
+				body:'Lato',
+			},			
+			{
+				id: "futuristic-clean",
+				name: "Futuristic and Clean",
+				heading: 'Poppins',
+				subheading: 'Roboto Condensed',
+				body:'Nunito Sans',
+			},
+			{
+				id: "geometric-sans-serif",
+				name: "Geometric Sans-Serif",
+				heading: 'Roboto Condensed',
+				subheading: 'Ubuntu',
+				body:'Noto Sans',
+			},
+			{
+				id: "handwritten",
+				name: "Handwritten",
+				heading: 'Pacifico',
+				subheading: 'Amatic SC',
+				body:'Indie Flower',
+			},
+			{
+				id: "luxury-elegance",
+				name: "Luxury and Elegance",
+				heading: 'Cormorant Garamond',
+				subheading: 'Parisienne',
+				body:'Lato',
+			},			
+			{
+				id: "minimalist",
+				name: "Minimalist",
+				heading: 'Source Sans Pro',
+				subheading: 'Lato',
+				body:'Poppins',
+			},
+			{
+				id: "modern-serif",
+				name: "Modern Sans-Serif",
+				heading: 'Montserrat',
+				subheading: 'Raleway',
+				body:'Open Sans',
+			},
+			{
+				id: "nature-organic",
+				name: "Nature and Organic",
+				heading: 'Caveat',
+				subheading: 'Satisfy',
+				body:'Dosis',
+			},
+			{
+				id: "narrow",
+				name: "Narrow",
+				heading: 'Lato',
+				subheading: 'Lato',
+				body:'Oswald',
+			},
+			{
+				id: "playful-casual",
+				name: "Playful and Casual",
+				heading: 'Luckiest Guy',
+				subheading: 'Pacifico',
+				body:'Nunito Sans',
+			},
+			{
+				id: "professional-business",
+				name: "Professional and Business",
+				heading: 'Raleway',
+				subheading: 'Montserrat',
+				body:'Roboto',
+			},
+			{
+				id: "retro",
+				name: "Retro",
+				heading: 'Lobster',
+				subheading: 'Pacifico',
+				body:'Indie Flower',
+			},
+			{
+				id: "serif-elegance",
+				name: "Serif Elegance",
+				heading: 'Crimson Text',
+				subheading: 'Merriweather',
+				body:'Source Sans Pro',
+			},
+			{
+				id: "tech-modern",
+				name: "Tech and Modern",
+				heading: 'Exo 2',
+				subheading: 'Orbitron',
+				body:'Raleway',
+			},
+			{
+				id: "vintage-rustic",
+				name: "Vintage and Rustic",
+				heading: 'Abril Fatface',
+				subheading: 'Josefin Slab',
+				body:'Lora',
+			},
+		]
+		const style = document.head.appendChild(document.createElement("style"));
+		var imports = styles.map(style => `@import url("${style.id}.css");`);
+		var rules = styles.map(style => `#${style.id}{--font-heading: '${style.heading}';--font-subheading: '${style.subheading}';--font-body: '${style.body}'",`);
+		style.innerHTML = imports.join("\n")+rules.join("\n");
+		const card = document.getElementById("card");
+		styles.forEach(style => {
 			var fieldset = document.createElement("fieldset");
 			fieldset.classList.add("card");
 			let legend = fieldset.appendChild(document.createElement("legend"));
-			legend.innerHTML = nom;
-			fieldset.id = styles[nom].slice(1).split("{")[0];
-			var div = fieldset.appendChild(document.createElement("div"));
-			div.innerHTML = card;
+			legend.innerHTML = `${style.name} (${style.id})`;
+			fieldset.id = style.id;
+			fieldset.appendChild(card.content.cloneNode(true));
 			document.querySelector("main").appendChild(fieldset);
-		}
+			legend.addEventListener("click", event => {
+				const input = document.createElement("input");
+				input.value = `@import url('css/font-themes/${style.id}.css');\n`;
+				document.body.appendChild(input);
+				input.select();
+				document.execCommand("copy");
+				document.body.removeChild(input);
+			});
+		});
 	</script>
+	<style>
+		html {
+			background-color: #333;
+			color: #fff;
+			font-family: Arial, Helvetica, sans-serif;
+		}
+		body {
+			margin: 0 2em;
+		}
+		#interface > header > h1 {
+			font-family: Arial, Helvetica, sans-serif;
+		
+		}
+		.card {
+			font-family: var(--font-body);
+			font-size: 10px;
+			border: 1px solid black;
+			padding: 1em 2em;
+			background-color: #fff;
+			color: #333;
+		}
+		h1,
+		h3,
+		.heading {
+			font-family: var(--font-heading);
+			font-weight: 700;
+		}
+		legend {
+			font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+			font-weight: bold;
+			border: 1px solid #333;
+			border-bottom: none;
+			border-radius: .5em .5em 0 0;
+			cursor: copy;
+		}
+		legend:hover {
+			background-color: #ffc;
+		}
+		h2,
+		h4,
+		th,
+		caption,
+		label,
+		figcaption,
+		.subheading {
+			font-family: var(--font-subheading);
+			font-weight: 400;
+		}
+		legend {
+			background-color: #fff;
+			padding: .5em 1em 0;
+		}
+		main {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: .5em;
+		}
+	</style>
 </head>
 
 <body>
@@ -55,7 +237,16 @@
 		<header>
 			<h1>Tont Themes</h1>
 		</header>
-		<main></main>
+		<main>
+			<template id="card">
+				<div>
+					<h1>Exploring the Deep Sea: Discovering Hidden Wonders Beneath the Ocean</h1>
+					<p>Scuba diving is much more than just a hobby; it's an adventure that takes you into a realm of extraordinary beauty. Colorful coral reefs, vibrant exotic fish, and fascinating marine creatures await you.</p>
+					<h2>Dive into the mysterious world of the abyss where marine fauna and flora reveal their splendor.</h2>
+					<p>Join us for an unforgettable exploration of the depths of the sea, where each dive unveils new surprises. It's an opportunity to discover the diversity of marine life and raise awareness about the importance of preserving our oceans for future generations.</p>
+				</div>
+			</template>
+		</main>
 	</div>
 </body>
 
