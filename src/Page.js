@@ -36,6 +36,7 @@ export default class Page {
             this[p] = props[p];
         }
         this.addStylesheet();
+        this.addFontTheme();
         console.log(this);
         var flaps = document.querySelectorAll(".flap");
         if (flaps.length > 0) {
@@ -146,12 +147,31 @@ export default class Page {
      * @returns {HTMLLinkElement} - The created stylesheet link element.
      */
     static addStylesheet(insert = true) {
-        var { href } = new URL(import.meta.url);
-        href = href.split("/").slice(0, -2);
-        href.push("css", "style.css");
-        href = href.join("/");
         var link = document.createElement("link");
-        link.href = href;
+        link.href = this.url("css", "style.css");
+        link.rel = "stylesheet";
+        if (insert) {
+            document.head.insertBefore(link, document.head.firstChild);
+        }
+        return link;
+    }
+    static url(...files) {
+        var { href: result } = new URL(import.meta.url);
+        result = result.split("/").slice(0, -2);
+        result.push(...files);
+        result = result.join("/");
+        return result;
+    }
+    /**
+     * Adds a stylesheet to the document for styling pages.
+     * @param {boolean} [insert=true] - Whether to insert the stylesheet into the document.
+     * @returns {HTMLLinkElement} - The created stylesheet link element.
+     */
+    static addFontTheme(theme, insert = true) {
+        theme = theme || this.theme;
+        if (!theme) return;
+        var link = document.createElement("link");
+        link.href = this.url("css", "font-themes", theme + ".css");
         link.rel = "stylesheet";
         if (insert) {
             document.head.insertBefore(link, document.head.firstChild);
