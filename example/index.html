@@ -5,36 +5,29 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
     <script type="module">
-        import { Page } from '.-/src/Page.js';
-        Page.main();
+        import Page from '../src/Page.js';
+        const pages = Page.from('.flap');
+        pages.forEach(page => {
+            page.apply();
+        });
     </script>
-    <link rel="stylesheet" href="css/example.css">
+    <link rel="stylesheet" href="css/style.css">
     <title>Au théâtre</title>
 </head>
 
-<body data-rows="2" data-columns="2" data-orientation="landscape" data-format="letter" data-marks.length="1in">
-    <div class="flap" data-margin="1in">
-        <h1>Au théâtre</h1>
+<body data-rows="3" data-columns="2" data-margin=".25in" data-orientation="landscape" data-format="letter" data-marks-length=".5in">
+    <div class="flap" id="flap1" data-columns="1">
+        <h1>Lorem Ipsum 1</h1>
         <div>
-            <div>
-                <p class="intro">Les quatre sièges du milieu dans les trois premières rangées d'une loge au théâtre étaient tous pris lors d'un spectacle récemment. À l'aide des indices ci-dessous, pouvez-vous assigner la bonne place à ces gens?</p>
-                <h2>Indices</h2>
-                <ol>
-                    <li>Pierre est assis juste derrière Angela et en diagonale devant Henri.</li>
-                    <li>Nina a le billet pour le siège 12 de la rangée B.</li>
-                    <li>Les sièges de chaque rangée sont occupés par deux hommes et deux femmes.</li>
-                    <li>Maxine est à deux sièges à droite de Robert sur la même rangée.</li>
-                    <li>Judy, qui est juste derrière Charles, a son mari Vincent à sa droite.</li>
-                    <li>Un des hommes occupe le siège 13 de la rangée A.</li>
-                    <li>Tony, Janet et Lydia ne sont pas dans la même rangée. Le siège à gauche de Lydia est occupé par un homme.</li>
-                </ol>
-            </div>
-            <div>
-                <img style="width:100%;" src="img/fauteuil.svg" alt="" />
-                <div><strong>Noms</strong>: Angela, Charles, Henri, Janet, Judy, Lydia, Maxine, Nina, Pierre, Robert, Tony, Vincent.</div>
-                <div><strong>Truc</strong>: Trouvez d'abord le nom de la personne qui occupe le siège 13 de la rangée A.</div>
-            </div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis aliquid reprehenderit qui sed? Temporibus veritatis perspiciatis quidem porro aspernatur accusantium? Cupiditate porro doloribus, quas impedit ducimus sint nesciunt voluptatem accusamus.
+        </div>
+    </div>
+    <div class="flap" id="flap2" data-columns="3" data-margin=".5in" data-orientation="portrait" data-format="legal">
+        <h1>Lorem Ipsum2</h1>
+        <div>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis aliquid reprehenderit qui sed? Temporibus veritatis perspiciatis quidem porro aspernatur accusantium? Cupiditate porro doloribus, quas impedit ducimus sint nesciunt voluptatem accusamus.
         </div>
     </div>
 </body>

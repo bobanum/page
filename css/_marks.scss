@@ -1,7 +1,6 @@
-.marks {
-    --width: 1px;
+.page--marks {
     --length: 0.25in;
-    --color: hsl(0, 0%, 80%);
+    --stroke: .5px solid hsl(0, 0%, 80%);
     display: grid;
     > * {
         grid-row: 1;
@@ -9,40 +8,46 @@
         display: grid;
         > * > *, > ::before, > ::after {
             content: "";
-            border: 0px solid var(--color);
+            // border: var(--stroke);
         }
-        &.rows {
+        &:first-child {
             align-content: space-evenly;
             > * {
                 display: flex;
                 justify-content: space-between;
+                > *, 
                 &::before,
                 &::after {
-                    width: var(--length);
-                    border-top-width: var(--width);
+                    border-top: var(--stroke);
                 }
                 > * {
                     width: calc(var(--length) / 2);
-                    border-top-width: var(--width);
                     margin: 0 calc(var(--length) * 3 / 4);
+                }
+                &::before,
+                &::after {
+                    width: var(--length);
                 }
             }
         }
-        &.columns {
+        &:last-child {
             grid-auto-flow: column;
             justify-content: space-evenly;
             > * {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
+                *, 
+                &::before,
+                &::after {
+                    border-left: var(--stroke);
+                }
                 &::before,
                 &::after {
                     height: var(--length);
-                    border-left-width: var(--width);
                 }
                 > * {
                     height: calc(var(--length) / 2);
-                    border-left-width: var(--width);
                     margin: calc(var(--length) * 3 / 4) 0;
                 }
             }

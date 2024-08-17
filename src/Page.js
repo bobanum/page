@@ -2,78 +2,79 @@
  * Represents a page class for generating printable pages with specific settings.
  */
 export default class Page {
-    /**
-     * The orientation of the page (e.g., "portrait").
-     * @type {string}
-     */
-    static orientation = "portrait";
-    /**
-     * The format of the page (e.g., "letter").
-     * @type {string}
-     */
-    static format = "letter";
-    /**
-     * The number of columns on the page.
-     * @type {number}
-     */
-    static _columns = 1;
-    /**
-     * The number of rows on the page.
-     * @type {number}
-     */
-    static _rows = 1;
-    /**
-     * The margin of the page (e.g., "0.5in").
-     * @type {string}
-     */
-    static margin = "0.5in";
-    /**
-     * Initializes the Page class with the provided properties and generates pages.
-     * @param {Object} props - Properties to set for the Page class.
-     */
-    static main(props = {}) {
+    constructor(domain, props = {}) {
+        if (typeof domain === "string") {
+            domain = document.querySelector(domain);
+        }
+        this.domain = domain;
+        this.props = Object.create(this.__proto__.props);
+        this.id = domain.id;
+        this.props.id = this.id;
+        this.parseData(this.domain);
         for (let p in props) {
             this[p] = props[p];
         }
+    }
+    static init() {
+        this.prototype.props = {
+            columns: 1,    // The number of columns on the page.
+            rows: 1,   // The number of rows on the page.
+            orientation: "portrait", // The orientation of the page (e.g., "portrait").
+            format: "letter", // The format of the page (e.g., "letter").
+            margin: "0.5in",    // The margin of the page (e.g., "0.5in").
+            // marksStroke: "0.5px", // The width of the page marks (e.g., "0.5in").
+            // marksColor: "black", // The color of the page marks (e.g., "black").
+            // marksLength: "1in", // The style of the page marks (e.g., "solid").    
+        };
+
+        const regularProps = ["orientation", "format", "margin", "marksStroke", "marksColor", "marksLength"];
+        for (let prop of regularProps) {
+            Object.defineProperty(this.prototype, prop, {
+                get: function () {
+                    return this.props[prop];
+                },
+                set: function (val) {
+                    this.props[prop] = val;
+                }
+            });
+        }
+
+        this.parseData(this.prototype, document.body);
+        this.formatBody();
+
         this.addStylesheet();
         this.addFontTheme();
-        console.log(this);
-        var flaps = document.querySelectorAll(".flap");
-        if (flaps.length > 0) {
-            flaps.forEach(flap => {
-                var props = Object.create(this);
-                this.parseData(props, flap);
-                var page = document.createElement("div");
-                page.classList.add("page");
-                this.formatPage(page, props);
-                page.appendChild(this.marks(props.rows, props.columns));
-                page.appendChild(this.flaps(flap, props.rows * props.columns));
-                document.body.appendChild(page);
-            });
+    }
+    apply() {
+        if (this.domain === null) {
             return;
         }
-        var pages = document.querySelectorAll(".page");
-        if (pages.length > 0) {
-            pages.forEach(page => {
-                var props = Object.create(this);
-                this.parseData(props, page);
-                this.formatPage(page);
-            });
-            return;
-        }
+        this.page = this.createPage();
+        this.page.appendChild(this.parts(this.domain, this.rows * this.columns));
+    }
+    createPage() {
+        var page = document.createElement("div");
+        page.classList.add("page--page");
+        this.formatPage(page);
+
+        page.appendChild(this.marks(this.rows, this.columns));
+        // page.appendChild(this.parts(part, props.rows * props.columns));
+        this.domain.parentNode.insertBefore(page, this.domain);
+        this.domain.remove();
+        return page;
     }
     /**
-     * Creates and returns a set of flaps for a page.
-     * @param {Element} flap - The flap element to duplicate.
-     * @param {number} nb - The number of flaps to create.
-     * @returns {Element} - The container element with flaps.
+     * Creates and returns a set of parts for a page.
+     * @param {Element} part - The part element to duplicate.
+     * @param {number} nb - The number of parts to create.
+     * @returns {Element} - The container element with parts.
      */
-    static flaps(flap, nb) {
+    parts(part, nb) {
         var result = document.createElement("div");
-        result.classList.add("flaps");
-        result.appendChild(flap);
+        result.classList.add("page--parts");
+        result.appendChild(part);
         for (let i = 1; i < nb; i += 1) {
-            result.appendChild(flap.cloneNode(true));
+            result.appendChild(part.cloneNode(true));
         }
         return result;
     }
@@ -93,53 +94,64 @@ export default class Page {
         });
         return obj;
     }
+    parseData(...elements) {
+        return this.constructor.parseData(this, ...elements);
+    }
     /**
      * Gets the number of columns on the page.
      * @returns {number} - The number of columns.
      */
-    static get columns() {
-        return this._columns;
+    get columns() {
+        return this.props.columns;
     }
     /**
      * Sets the number of columns on the page.
      * @param {number} val - The number of columns to set.
      */
-    static set columns(val) {
-        this._columns = parseInt(val);
+    set columns(val) {
+        this.props.columns = parseInt(val);
     }
     /**
      * Gets the number of rows on the page.
      * @returns {number} - The number of rows.
      */
-    static get rows() {
-        return this._rows;
+    get rows() {
+        return this.props.rows;
     }
     /**
      * Sets the number of rows on the page.
      * @param {number} val - The number of rows to set.
      */
-    static set rows(val) {
-        this._rows = parseInt(val);
+    set rows(val) {
+        this.props.rows = parseInt(val);
     }
     /**
      * Formats a page element with the specified properties.
      * @param {Element} page - The page element to format.
      * @param {Object} props - The properties for formatting the page.
      */
-    static formatPage(page, props = null) {
-        if (props === null) {
-            props = Object.create(this);
-            this.parseData(page, props);
-        }
+    static formatBody() {
+        const props = this.prototype.props;
         var size = this.getSize(props);
         if (props.orientation) {
-            page.style.setProperty("page", props.orientation);
+            document.body.style.setProperty("page", props.orientation);
+        }
+        document.body.style.setProperty("--width", size.width + "pt");
+        document.body.style.setProperty("--height", size.height + "pt");
+        document.body.style.setProperty("--margin", props.margin || this.margin);
+        document.body.style.setProperty("--columns", props.columns || this.columns || 1);
+        document.body.style.setProperty("--rows", props.rows || this.rows || 1);
+    }
+    formatPage(page) {
+        var size = this.getSize(this.props);
+        if (this.props.orientation) {
+            page.style.setProperty("page", this.props.orientation);
         }
         page.style.setProperty("--width", size.width + "pt");
         page.style.setProperty("--height", size.height + "pt");
-        page.style.setProperty("--margin", props.margin || this.margin);
-        page.style.setProperty("--columns", props.columns || this.columns || 1);
-        page.style.setProperty("--rows", props.rows || this.rows || 1);
+        page.style.setProperty("--margin", this.props.margin || this.margin);
+        page.style.setProperty("--columns", this.props.columns || this.columns || 1);
+        page.style.setProperty("--rows", this.props.rows || this.rows || 1);
     }
     /**
      * Adds a stylesheet to the document for styling pages.
@@ -184,9 +196,12 @@ export default class Page {
      * @returns {{width: number, height: number}} - The size of the page in points.
      */
 
-    static getSize(obj = this) {
+    getSize() {
+        return this.constructor.getSize(this.props);
+    }
+    static getSize(props) {
         var width = 0, height = 0;
-        switch (obj.format.toLowerCase()) {
+        switch (props.format.toLowerCase()) {
             case "letter":
                 width = this.toPts(8.5, "in");
                 height = this.toPts(11, "in");
@@ -209,14 +224,13 @@ export default class Page {
                 height = this.toPts(297, "mm");
                 break;
             default:
-                let [w, wu, h, hu] = /([0-9.]+)([a-z]+)X([0-9.]+)([a-z]+)/i.exec(obj.format).slice(1);
-                console.log(obj.format);
+                let [w, wu, h, hu] = /([0-9.]+)([a-z]+)X([0-9.]+)([a-z]+)/i.exec(props.format).slice(1);
+                console.log(props.format);
                 width = this.toPts(w, wu);
                 height = this.toPts(h, hu);
-                obj.orientation = "";
+                props.orientation = "";
         }
-        console.log(obj);
-        if ((obj.orientation === "portrait" && width > height) || (obj.orientation === "landscape" && width < height)) {
+        if ((props.orientation === "portrait" && width > height) || (props.orientation === "landscape" && width < height)) {
             [width, height] = [height, width];
         }
         return { width: width, height: height };
@@ -242,33 +256,56 @@ export default class Page {
      * @param {number} columns - The number of columns.
      * @returns {Element} - The container element with page marks.
      */
-    static marks(rows, columns) {
-        var resultat = document.createElement("div");
-        resultat.classList.add("marks");
-        var divRows = resultat.appendChild(document.createElement("div"));
-        divRows.classList.add("columns");
+    marks() {
+        const { rows, columns } = this;
+        var result = document.createElement("div");
+        result.classList.add("page--marks");
+        this.propsToCss('marks', result);
+        var divRows = result.appendChild(document.createElement("div"));
         for (let c = 1; c < columns; c += 1) {
             let group = divRows.appendChild(document.createElement("div"));
             for (let r = 1; r < rows; r += 1) {
                 group.appendChild(document.createElement("div"));
             }
         }
-        var divColumns = resultat.appendChild(document.createElement("div"));
-        divColumns.classList.add("rows");
+        var divColumns = result.appendChild(document.createElement("div"));
         for (let r = 1; r < rows; r += 1) {
             let group = divColumns.appendChild(document.createElement("div"));
             for (let c = 1; c < columns; c += 1) {
                 group.appendChild(document.createElement("div"));
             }
         }
-        return resultat;
+        return result;
+    }
+    propsToCss(prefix, element) {
+        for (let prop in this.props) {
+            if (prop.startsWith(prefix)) {
+                let name = prop.slice(prefix.length).toLowerCase();
+                let value = this.props[prop];
+                element.style.setProperty(`--${name}`, value);
+            }
+        }
+    }
+    static from(...domains) {
+        const result = [];
+        for (let domain of domains) {
+            if (typeof domain === "string") {
+                domain = [...document.querySelectorAll(domain)];
+            }
+            if (Array.isArray(domain)) {
+                result.push(...domain.map(d => this.from(d)).flat());
+                continue;
+            }
+            result.push(new Page(domain));
+        }
+        return result;
     }
     /**
      * Initializes the Page class by parsing data attributes of the body element.
      */
-    static init() {
-        this.parseData(this, document.body);
-    }
+    // static init() {
+    //     this.parseData(this, document.body);
+    // }
 }
 
 
