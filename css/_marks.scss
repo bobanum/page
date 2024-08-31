@@ -2,50 +2,64 @@
     --length: 0.25in;
     --stroke: .5px solid hsl(0, 0%, 80%);
     display: grid;
+
     > * {
         grid-row: 1;
         grid-column: 1;
         display: grid;
-        > * > *, > ::before, > ::after {
+
+        > * > *,
+        > ::before,
+        > ::after {
             content: "";
             // border: var(--stroke);
         }
-        &:first-child {
+
+        &:last-child {
             align-content: space-evenly;
+
             > * {
                 display: flex;
                 justify-content: space-between;
-                > *, 
+
+                > *,
                 &::before,
                 &::after {
                     border-top: var(--stroke);
                 }
+
                 > * {
                     width: calc(var(--length) / 2);
                     margin: 0 calc(var(--length) * 3 / 4);
                 }
+
                 &::before,
                 &::after {
                     width: var(--length);
                 }
             }
         }
-        &:last-child {
+
+        &:first-child {
             grid-auto-flow: column;
             justify-content: space-evenly;
+
             > * {
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
-                *, 
+
+                *,
                 &::before,
                 &::after {
                     border-left: var(--stroke);
                 }
+
                 &::before,
                 &::after {
                     height: var(--length);
                 }
+
                 > * {
                     height: calc(var(--length) / 2);
                     margin: calc(var(--length) * 3 / 4) 0;

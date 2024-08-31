@@ -9,7 +9,7 @@ Font 3 (Body): Indie Flower
 @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Amatic+SC&family=Indie+Flower&display=swap');
 
 /* Apply the fonts to selectors */
-:root {
+:root, :host {
     --font-heading: 'Pacifico', sans-serif;
     --font-subheading: 'Amatic SC', cursive;
     --font-body: 'Indie Flower', cursive;

@@ -6,7 +6,7 @@ Font 3 (Body): Roboto
 */
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400&family=Montserrat:wght@400&family=Roboto:wght@400&display=swap');
 
-:root {
+:root, :host {
     --font-heading: 'Raleway', sans-serif;
     --font-subheading: 'Montserrat', sans-serif;
     --font-body: 'Roboto', sans-serif;

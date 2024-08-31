@@ -6,7 +6,7 @@ Font 3 (Body): Nunito Sans
 */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&family=Roboto+Condensed:wght@400&family=Nunito+Sans:wght@400&display=swap');
 
-:root {
+:root, :host {
     --font-heading: 'Poppins', sans-serif;
     --font-subheading: 'Roboto Condensed', sans-serif;
     --font-body: 'Nunito Sans', sans-serif;

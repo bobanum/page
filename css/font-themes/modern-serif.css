@@ -7,7 +7,7 @@ Font 3 (Body): Open Sans
 
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Raleway:wght@400;700&family=Open+Sans:wght@400;700&display=swap');
 
-:root {
+:root, :host {
     --font-heading: 'Montserrat', sans-serif;
     --font-subheading: 'Raleway', sans-serif;
     --font-body: 'Open Sans', sans-serif;

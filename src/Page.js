@@ -258,6 +258,8 @@ export default class Page {
      */
     marks() {
         const { rows, columns } = this;
+        console.log(rows, columns);
+
         var result = document.createElement("div");
         result.classList.add("page--marks");
         this.propsToCss('marks', result);

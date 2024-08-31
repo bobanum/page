@@ -7,8 +7,9 @@ Font 3 (Body): Dancing Script
 
 @import url('https://fonts.googleapis.com/css2?family=Poiret+One&family=Indie+Flower&family=Dancing+Script&display=swap');
 
-:root {
+:root, :host {
     --font-heading: 'Poiret One', cursive;
     --font-subheading: 'Indie Flower', cursive;
     --font-body: 'Dancing Script', cursive;
+    font-family: var(--font-body);
 }

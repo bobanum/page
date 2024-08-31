@@ -7,7 +7,7 @@ Font 3 (Body): Indie Flower
 
 @import url('https://fonts.googleapis.com/css2?family=Lobster&family=Pacifico&family=Indie+Flower&display=swap');
 
-:root {
+:root, :host {
     --font-heading: 'Lobster', cursive;
     --font-subheading: 'Pacifico', cursive;
     --font-body: 'Indie Flower', cursive;

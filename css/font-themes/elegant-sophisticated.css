@@ -6,7 +6,7 @@ Font 3 (Body): Source Sans Pro
 */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant&family=Crimson+Text&family=Source+Sans+Pro:wght@400&display=swap');
 
-:root {
+:root, :host {
     --font-heading: 'Cormorant', serif;
     --font-subheading: 'Crimson Text', serif;
     --font-body: 'Source Sans Pro', sans-serif;

@@ -9,7 +9,7 @@ Font 3 (Body): Noto Sans
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Ubuntu:wght@400;700&family=Noto+Sans:wght@400;700&display=swap');
 
 /* Apply the fonts to selectors */
-:root {
+:root, :host {
     --font-heading: 'Roboto Condensed', sans-serif;
     --font-subheading: 'Ubuntu', sans-serif;
     --font-body: 'Noto Sans', sans-serif;

@@ -7,7 +7,7 @@ Font 3 (Body): Lato
 
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond&family=Parisienne&family=Lato:wght@400&display=swap');
 
-:root {
+:root, :host {
     --font-heading: 'Cormorant Garamond', serif;
     --font-subheading: 'Parisienne', cursive;
     --font-body: 'Lato', sans-serif;

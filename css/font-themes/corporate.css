@@ -10,7 +10,7 @@ Font 3 (Body): Roboto
 
 /* Apply the fonts to selectors */
 /* Classic Serif Trio */
-:root {
+:root, :host {
     --font-heading: 'Lato', sans-serif;
     --font-subheading: 'Open Sans', sans-serif;
     --font-body: 'Roboto', sans-serif;

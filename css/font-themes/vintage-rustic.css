@@ -6,7 +6,7 @@ Font 3 (Body): Lora
 */
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Josefin+Slab&family=Lora:wght@400&display=swap');
 
-:root {
+:root, :host {
     --font-heading: 'Abril Fatface', cursive;
     --font-subheading: 'Josefin Slab', serif;
     --font-body: 'Lora', serif;
