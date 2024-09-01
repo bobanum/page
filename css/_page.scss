@@ -13,22 +13,39 @@
 @page portrait {
     size: var(--width) var(--height);
 }
-
 .page--page {
+    display: contents;
+}
+
+:host {
+    --width: 8.5in;
+    --height: 11in;
+    --margin: .25in;
+    --rows: 1;
+    --cols: 1;
     position: relative;
     width: var(--width);
     height: var(--height);
     display: grid;
-    > * {
-        grid-row: 1 / 1;
-        grid-column: 1 / 1;
-    }
+    grid-template-columns: repeat(var(--cols), 1fr);
+    grid-template-rows: repeat(var(--rows), 1fr);
+    // > * {
+    //     grid-row: 1 / 1;
+    //     grid-column: 1 / 1;
+    // }
     
     @media screen {
         background-color: #fff;
-        box-shadow: .5em .5em 1em black;
+        box-shadow: .15em .15em .4em #0003;
         margin: 1em auto;
     }
+}
+slot, .slot {
+    padding: var(--margin);
+    display: block;
+    // grid-row: 1 / 1;
+    // grid-column: 1 / 1;
+    overflow: hidden;
 }
 .page--parts {
     display: grid;
