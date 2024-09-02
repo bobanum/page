@@ -29,10 +29,6 @@
     display: grid;
     grid-template-columns: repeat(var(--cols), 1fr);
     grid-template-rows: repeat(var(--rows), 1fr);
-    // > * {
-    //     grid-row: 1 / 1;
-    //     grid-column: 1 / 1;
-    // }
     
     @media screen {
         background-color: #fff;

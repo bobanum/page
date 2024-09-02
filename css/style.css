@@ -104,8 +104,11 @@ slot, .slot {
 }
 
 .marks {
-  --length: 0.25in;
-  --stroke: .5px solid hsl(0, 0%, 80%);
+  --marks-length: 18;
+  --marks-width: 0.5;
+  --marks-color: hsl(0, 0%, 0%, .1);
+  --marks-style: solid;
+  --marks-stroke: calc(1pt * var(--marks-width)) var(--marks-style) var(--marks-color);
   display: grid;
   position: absolute;
   top: 0;
@@ -132,14 +135,14 @@ slot, .slot {
   justify-content: space-between;
 }
 .marks > *:last-child > * > *, .marks > *:last-child > *::before, .marks > *:last-child > *::after {
-  border-top: var(--stroke);
+  border-top: var(--marks-stroke);
 }
 .marks > *:last-child > * > * {
-  width: calc(var(--length) / 2);
-  margin: 0 calc(var(--length) * 3 / 4);
+  width: calc(1pt * var(--marks-length) / 2);
+  margin: 0 calc(1pt * var(--marks-length) * 3 / 4);
 }
 .marks > *:last-child > *::before, .marks > *:last-child > *::after {
-  width: var(--length);
+  width: calc(1pt * var(--marks-length));
 }
 .marks > *:first-child {
   grid-auto-flow: column;
@@ -151,12 +154,12 @@ slot, .slot {
   justify-content: space-between;
 }
 .marks > *:first-child > * *, .marks > *:first-child > *::before, .marks > *:first-child > *::after {
-  border-left: var(--stroke);
+  border-left: var(--marks-stroke);
 }
 .marks > *:first-child > *::before, .marks > *:first-child > *::after {
-  height: var(--length);
+  height: calc(1pt * var(--marks-length));
 }
 .marks > *:first-child > * > * {
-  height: calc(var(--length) / 2);
-  margin: calc(var(--length) * 3 / 4) 0;
+  height: calc(1pt * var(--marks-length) / 2);
+  margin: calc(1pt * var(--marks-length) * 3 / 4) 0;
 }
