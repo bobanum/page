@@ -10,7 +10,7 @@ export default class Page extends HTMLElement {
     }
     connectedCallback() {
         this.shadowRoot.appendChild(this.dom.link());
-        this.shadowRoot.appendChild(this.dom.page());
+        this.page = this.shadowRoot.appendChild(this.dom.page());
         this.shadowRoot.appendChild(this.dom.marks());
     }
 
@@ -43,7 +43,7 @@ export default class Page extends HTMLElement {
             var page = document.createElement("div");
             page.classList.add("page--page");
             page.appendChild(this.dom.slot(this.cols * this.rows));
-            this.formatPage(page);
+            this.formatElement(page);
             return page;
         },
         slot: (n = 1) => {
@@ -169,10 +169,10 @@ export default class Page extends HTMLElement {
         if (marks === "none") {
             return "none";
         }
-        
+
         const parts = marks.split(/\s+/);
         const sizes = parts.filter(p => p.match(/^[\d+-.]+[a-z]*$/));
-        
+
         if (sizes.length > 0) {
             result.length = this.toPoints(sizes[1]) || result.length;
         }
@@ -187,19 +187,21 @@ export default class Page extends HTMLElement {
         if (color) {
             result.color = color;
         }
-        
+
         return result;
     }
-    formatPage(page) {
+    formatElement(element) {
+        console.log("formatElement", element);
+
         var size = this.getSize();
         if (this.orientation) {
-            page.style.setProperty("page", this.orientation);
+            element.style.setProperty("page", this.orientation);
         }
-        this.style.setProperty("--width", size.width + "pt");
-        this.style.setProperty("--height", size.height + "pt");
-        this.style.setProperty("--margin", this.margin);
-        this.style.setProperty("--cols", this.cols);
-        this.style.setProperty("--rows", this.rows);
+        element.style.setProperty("--width", size.width + "pt");
+        element.style.setProperty("--height", size.height + "pt");
+        element.style.setProperty("--margin", this.margin);
+        element.style.setProperty("--cols", this.cols);
+        element.style.setProperty("--rows", this.rows);
     }
     /**
      * Adds a stylesheet to the document for styling pages.
@@ -238,39 +240,44 @@ export default class Page extends HTMLElement {
      */
     getSize() {
         var width = 0, height = 0;
-        switch (this.format) {
-            case "letter":
-                width = this.toPoints(8.5, "in");
-                height = this.toPoints(11, "in");
-                break;
-            case "legal":
-                width = this.toPoints(8.5, "in");
-                height = this.toPoints(14, "in");
-                break;
-            case "ledger":
-            case "tabloid":
-                width = this.toPoints(11, "in");
-                height = this.toPoints(17, "in");
-                break;
-            case "a3":
-                width = this.toPoints(297, "mm");
-                height = this.toPoints(420, "mm");
-                break;
-            case "a4":
-                width = this.toPoints(210, "mm");
-                height = this.toPoints(297, "mm");
-                break;
-            default:
-                let [w, wu, h, hu] = /([0-9.]+)([a-z]+)X([0-9.]+)([a-z]+)/i.exec(this.format).slice(1);
-                width = this.toPoints(w, wu);
-                height = this.toPoints(h, hu);
+        const formats = {
+            halfletter: ["5.5in", "8.5in"],
+            letter: ["8.5in", "11in"],
+            halflegal: ["7in", "8.5in"],
+            legal: ["8.5in", "14in"],
+            ledger: ["11in", "17in"],
+            tabloid: ["11in", "17in"],
+            edp: ["11in", "14in"],
+            a0: ["841mm", "1189mm"],
+            a1: ["594mm", "841mm"],
+            a2: ["420mm", "594mm"],
+            a3: ["297mm", "420mm"],
+            a4: ["210mm", "297mm"],
+            a5: ["148mm", "210mm"],
+            a6: ["105mm", "148mm"],
+            b0: ["1000mm", "1414mm"],
+            b1: ["707mm", "1000mm"],
+            b2: ["500mm", "707mm"],
+            b3: ["353mm", "500mm"],
+            b4: ["250mm", "353mm"],
+            b5: ["176mm", "250mm"],
+            b6: ["125mm", "176mm"]
+        };
+        let format = formats[this.format];
+        if (!format) {
+            let custom = /([0-9.]+[a-z]+)\s*x\s*([0-9.]+[a-z]+)/i.exec(this.format);
+            if (!custom) {
+                throw `Unrecognized format '${this.format}'`;
+            }
+            format = custom.slice(1);
         }
+        format = format.map(f => this.toPoints(f));
         if (this.hasAttribute("orientation")) {
-            if (this.orientation === "landscape" && width < height || this.orientation === "portrait" && width > height) {
-                [width, height] = [height, width];
+            if (this.orientation === "landscape" && format[0] < format[1] || this.orientation === "portrait" && format[0] > format[1]) {
+                format.reverse();
             }
         }
-        return { width: width, height: height };
+        return { width: format[0], height: format[1] };
     }
     /**
      * Converts a value from a specified unit to points (pt).
@@ -283,9 +290,9 @@ export default class Page extends HTMLElement {
             unit = val.match(/[a-z]*$/i)[0];
             val = parseFloat(val);
         }
-        
+
         unit = unit?.toLowerCase() || "pt";
-        
+
         const PTS = { pt: 1, in: 72, pc: 12, px: .75, mm: 2.83465, cm: 28.3465, dm: 283.465, m: 2834.65 };
         // TODO Manage %, ch and ex units
         // get body computed font size

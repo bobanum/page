@@ -58,28 +58,33 @@ figcaption {
 @page portrait {
   size: var(--width) var(--height);
 }
-.page--page {
-  display: contents;
-}
-
 :host {
   --width: 8.5in;
   --height: 11in;
   --margin: .25in;
   --rows: 1;
   --cols: 1;
+  display: grid;
   position: relative;
+}
+@media screen {
+  :host {
+    margin: 1em auto;
+  }
+}
+
+.page--page {
   width: var(--width);
   height: var(--height);
+  grid-area: 1/1;
   display: grid;
   grid-template-columns: repeat(var(--cols), 1fr);
   grid-template-rows: repeat(var(--rows), 1fr);
 }
 @media screen {
-  :host {
+  .page--page {
     background-color: #fff;
     box-shadow: 0.15em 0.15em 0.4em rgba(0, 0, 0, 0.2);
-    margin: 1em auto;
   }
 }
 
@@ -89,20 +94,6 @@ slot, .slot {
   overflow: hidden;
 }
 
-.page--parts {
-  display: grid;
-  padding: var(--margin);
-  grid-template-columns: repeat(var(--columns), 1fr);
-  grid-template-rows: repeat(var(--rows), 1fr);
-  gap: calc(2 * var(--margin));
-  align-items: stretch;
-  justify-items: stretch;
-}
-.page--parts > div {
-  position: relative;
-  z-index: 1;
-}
-
 .marks {
   --marks-length: 18;
   --marks-width: 0.5;
@@ -110,11 +101,7 @@ slot, .slot {
   --marks-style: solid;
   --marks-stroke: calc(1pt * var(--marks-width)) var(--marks-style) var(--marks-color);
   display: grid;
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  grid-area: 1/1;
   pointer-events: none;
 }
 .marks > * {

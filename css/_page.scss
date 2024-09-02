@@ -13,28 +13,30 @@
 @page portrait {
     size: var(--width) var(--height);
 }
-.page--page {
-    display: contents;
-}
-
 :host {
     --width: 8.5in;
     --height: 11in;
     --margin: .25in;
     --rows: 1;
     --cols: 1;
+    display: grid;
     position: relative;
+    @media screen {
+        margin: 1em auto;
+    }
+}
+.page--page {
     width: var(--width);
     height: var(--height);
+    grid-area: 1 / 1;
     display: grid;
     grid-template-columns: repeat(var(--cols), 1fr);
     grid-template-rows: repeat(var(--rows), 1fr);
-    
     @media screen {
         background-color: #fff;
         box-shadow: .15em .15em .4em #0003;
-        margin: 1em auto;
     }
+    
 }
 slot, .slot {
     padding: var(--margin);
@@ -43,17 +45,17 @@ slot, .slot {
     // grid-column: 1 / 1;
     overflow: hidden;
 }
-.page--parts {
-    display: grid;
-    padding: var(--margin);
-    grid-template-columns: repeat(var(--columns), 1fr);
-    grid-template-rows: repeat(var(--rows), 1fr);
-    gap: calc(2 * var(--margin));
-    align-items: stretch;
-    justify-items: stretch;
-    > div {
-        position: relative;
-        z-index: 1;
-    }
+// .page--parts {
+//     display: grid;
+//     padding: var(--margin);
+//     grid-template-columns: repeat(var(--columns), 1fr);
+//     grid-template-rows: repeat(var(--rows), 1fr);
+//     gap: calc(2 * var(--margin));
+//     align-items: stretch;
+//     justify-items: stretch;
+//     > div {
+//         position: relative;
+//         z-index: 1;
+//     }
     
-}
+// }
