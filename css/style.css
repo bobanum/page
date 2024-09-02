@@ -89,7 +89,7 @@ figcaption {
 }
 
 slot, .slot {
-  padding: var(--margin);
+  padding: calc(1pt * var(--margin));
   display: block;
   overflow: hidden;
 }

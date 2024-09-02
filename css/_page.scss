@@ -39,7 +39,7 @@
     
 }
 slot, .slot {
-    padding: var(--margin);
+    padding: calc(1pt * var(--margin));
     display: block;
     // grid-row: 1 / 1;
     // grid-column: 1 / 1;

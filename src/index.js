@@ -8,6 +8,20 @@ export default class Page extends HTMLElement {
         super();
         this.attachShadow({ mode: "open" });
     }
+    attributeChangedCallback(name, oldValue, newValue) {
+        console.log("onAttributeChanged", name, oldValue, newValue);
+        if (oldValue === newValue) {
+            return;
+        }
+        if (name === "margin") {
+            this.margin = newValue;
+        }
+        if (name === "marks") {
+            this.page.removeChild(this.page.querySelector(".marks"));
+            this.page.appendChild(this.dom.marks());
+        }
+    }
+    
     connectedCallback() {
         this.shadowRoot.appendChild(this.dom.link());
         this.page = this.shadowRoot.appendChild(this.dom.page());
@@ -140,6 +154,11 @@ export default class Page extends HTMLElement {
     }
     get margin() {
         return this.getAttribute("margin") || "0";
+    }
+    set margin(value) {
+        console.log("set margin", this.page);
+        this.page.style.setProperty("--margin", this.toPoints(value));
+        
     }
     get format() {
         return this.getAttribute("format")?.toLowerCase() || "letter";
