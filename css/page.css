@@ -1,0 +1,46 @@
+@page portrait {
+	--marges: 0;
+	size: letter portrait;
+	margin: var(--marges);
+}
+@page paysage {
+	--marges: 0;
+	size: letter landscape;
+	margin: var(--marges);
+}
+.page {
+	&.portrait {
+		page: portrait;
+	}
+	&.paysage {
+		page: paysage;
+	}
+	&:not(:last-child) {
+		page-break-after: always;
+	}
+	padding: var(--marges);
+	@media screen {
+		background-color: white;
+		margin: auto;
+		box-shadow: 1em 1em 2em rgba(0, 0, 0, 0.3);
+		&.portrait {
+		width: var(--larg);
+		height: var(--long);
+		}
+		&.paysage {
+			width: var(--long);
+			height: var(--larg);
+		}
+	}
+	@media print {
+		&.portrait {
+			width: var(--larg);
+			height: var(--long);
+		}
+		&.paysage {
+			width: var(--long);
+			height: var(--larg);
+		}
+		
+	}
+}

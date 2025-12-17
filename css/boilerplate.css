@@ -1,0 +1,19 @@
+html {
+	height: 100vh;
+	font-family: 'Open Sans', sans-serif;
+}
+body {
+	min-height: 100%;
+	@media screen {
+		background-color: #333;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1em;
+	}
+}
+*, *::before, *::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}

@@ -1,0 +1,70 @@
+/* style.css — règles @page pour tester portrait & landscape */
+
+@page portrait {
+	size: A4 portrait;
+	margin: 20mm;
+}
+
+@page landscape {
+	size: A4 landscape;
+	margin: 15mm;
+}
+
+/* Appliquer la page nommée et forcer saut de page avant */
+.section-portrait {
+	page: portrait;
+	break-before: page;
+	padding: 12mm;
+	box-sizing: border-box;
+}
+
+.section-landscape {
+	page: landscape;
+	break-before: page;
+	padding: 8mm;
+	box-sizing: border-box;
+}
+
+/* Styles d'aperçu à l'écran (non imprimés) */
+@media screen {
+	body {
+		font-family: Arial, Helvetica, sans-serif;
+		padding: 20px;
+		color: #222;
+	}
+
+	h1 {
+		margin-top: 0;
+	}
+
+	.hint {
+		color: #444;
+		font-size: 0.95rem;
+	}
+
+	.section-portrait,
+	.section-landscape {
+		border: 2px dashed #ccc;
+		margin: 10px 0 30px;
+		min-height: 200px;
+		background: #fbfbfb;
+	}
+
+	.section-landscape {
+		background: #f6fff6;
+	}
+
+	.note {
+		margin-top: 30px;
+		color: #666;
+		font-size: 0.9rem;
+	}
+}
+
+@media print {
+
+	/* masquez éléments d'UI si nécessaire */
+	body {
+		padding: 0;
+	}
+}
